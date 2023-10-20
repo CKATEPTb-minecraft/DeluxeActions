@@ -8,7 +8,7 @@ Write down tasks and indicate when they should be completed.
 </p>
 
 <p align="center">
-<img alt="License" src="https://img.shields.io/github/license/CKATEPTb-minecraft/ScheduledActions">
+<img alt="License" src="https://img.shields.io/github/license/CKATEPTb-minecraft/DeluxeActions">
 <a href="https://docs.gradle.org/7.5/release-notes.html"><img src="https://img.shields.io/badge/Gradle-7.5-brightgreen.svg?colorB=469C00&logo=gradle"></a>
 <a href="https://discord.gg/P7FaqjcATp" target="_blank"><img alt="Discord" src="https://img.shields.io/discord/925686623222505482?label=discord"></a>
 </p>
