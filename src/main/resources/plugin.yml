@@ -1,0 +1,7 @@
+name: '${projectName}'
+version: '${projectVersion}'
+main: '${projectMainClass}'
+api-version: 1.20
+authors: [ CKATEPTb ]
+description: Write down tasks and indicate when they should be completed.
+depend: [ Nicotine, Supervisor, Varflex, PlaceholderAPI ]
