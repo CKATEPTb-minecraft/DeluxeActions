@@ -51,7 +51,6 @@ public class TaskService implements Listener {
 
     @EventHandler
     public void on(DeluxeActionsReloadEvent event) {
-        System.out.println("task");
         this.tasks.clear();
         this.config.getTasks().forEach((name, declaration) -> {
             String type = declaration.type();

@@ -48,7 +48,6 @@ public class ActionService implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void on(DeluxeActionsReloadEvent event) {
-        System.out.println("action");
         this.actions.clear();
         Bukkit.getPluginManager().callEvent(new ActionRequestEvent(this));
     }

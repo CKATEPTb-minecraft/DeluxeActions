@@ -73,7 +73,6 @@ public class TaskTypeService implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void on(DeluxeActionsReloadEvent event) {
-        System.out.println("type");
         this.types.clear();
         Bukkit.getPluginManager().callEvent(new TaskTypeRequestEvent(this));
     }
