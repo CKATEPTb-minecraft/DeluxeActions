@@ -15,15 +15,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DeluxeActionCommandSender implements CommandSender {
-    public static DeluxeActionCommandSender of(CommandSender commandSender) {
-        return new DeluxeActionCommandSender(commandSender);
-    }
-
     @Delegate(excludes = Exclude.class)
     protected final CommandSender handle_;
 
     private DeluxeActionCommandSender(CommandSender handle_) {
         this.handle_ = handle_;
+    }
+
+    public static DeluxeActionCommandSender of(CommandSender commandSender) {
+        return new DeluxeActionCommandSender(commandSender);
     }
 
     /**

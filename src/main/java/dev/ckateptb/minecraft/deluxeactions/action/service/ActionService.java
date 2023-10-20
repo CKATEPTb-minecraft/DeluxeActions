@@ -53,7 +53,7 @@ public class ActionService implements Listener {
     }
 
     public void process(LinkedList<Map.Entry<Action, String>> actions, Player player) {
-        if(actions.isEmpty()) return;
+        if (actions.isEmpty()) return;
         Map.Entry<Action, String> entry = actions.remove(0);
         Action action = entry.getKey();
         String value = entry.getValue();

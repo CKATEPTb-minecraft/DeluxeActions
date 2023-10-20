@@ -11,12 +11,11 @@ import org.jetbrains.annotations.NotNull;
 @RequiredArgsConstructor
 public class TaskTypeRequestEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
+    private final TaskTypeService service;
 
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
-
-    private final TaskTypeService service;
 
     @NotNull
     @Override

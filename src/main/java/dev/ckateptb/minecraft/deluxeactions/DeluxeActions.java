@@ -12,15 +12,15 @@ public class DeluxeActions extends JavaPlugin {
     @Getter
     private static DeluxeActions plugin;
 
-    public static Logger log() {
-        return logger;
-    }
-
     public DeluxeActions() {
         plugin = this;
         logger = this.getSLF4JLogger();
         IoC.registerBean(this, DeluxeActions.class);
         IoC.scan(DeluxeActions.class);
+    }
+
+    public static Logger log() {
+        return logger;
     }
 
     @Override

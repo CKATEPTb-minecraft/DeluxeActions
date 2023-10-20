@@ -10,14 +10,12 @@ import org.jetbrains.annotations.NotNull;
 @RequiredArgsConstructor
 public class TaskTypeRegisterEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
+    private final TaskType<?> task;
+    private boolean cancelled;
 
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
-
-    private final TaskType<?> task;
-
-    private boolean cancelled;
 
     @NotNull
     @Override
