@@ -1,4 +1,4 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.player.hadler;
+package dev.ckateptb.minecraft.deluxeactions.integration.player.hadler;
 
 public enum PlayerActivationHandler {
     SNEAK,

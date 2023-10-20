@@ -1,9 +1,9 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.player.listener;
+package dev.ckateptb.minecraft.deluxeactions.integration.player.listener;
 
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.minecraft.deluxeactions.action.service.ActionService;
-import dev.ckateptb.minecraft.deluxeactions.impl.player.PlayerActionService;
-import dev.ckateptb.minecraft.deluxeactions.impl.player.hadler.PlayerActivationHandler;
+import dev.ckateptb.minecraft.deluxeactions.integration.player.PlayerActionService;
+import dev.ckateptb.minecraft.deluxeactions.integration.player.hadler.PlayerActivationHandler;
 import dev.ckateptb.minecraft.deluxeactions.task.service.TaskService;
 import dev.ckateptb.minecraft.deluxeactions.task.type.service.TaskTypeService;
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
@@ -21,8 +21,6 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-import java.util.LinkedList;
-
 @Component
 @RequiredArgsConstructor
 public class PlayerActionListener implements Listener {
@@ -34,7 +32,7 @@ public class PlayerActionListener implements Listener {
         this.typeService.findType(PlayerActionService.TYPE)
                 .ifPresent(type -> this.service.getTasks(type)
                         .filter(task -> task.getHandler().equalsIgnoreCase(handler.name()))
-                        .forEach(task -> this.actionService.process(new LinkedList<>(task.getActions().entrySet()), player)));
+                        .forEach(task -> this.actionService.process(task.getActions(), player)));
     }
 
     @EventHandler

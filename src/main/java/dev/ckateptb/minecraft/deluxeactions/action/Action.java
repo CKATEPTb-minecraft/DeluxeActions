@@ -8,4 +8,6 @@ public interface Action {
     String getName();
 
     boolean process(@Nullable Player player, String value);
+
+    String getInstruction();
 }

@@ -1,4 +1,4 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.actions;
+package dev.ckateptb.minecraft.deluxeactions.integration.actions;
 
 import dev.ckateptb.minecraft.deluxeactions.action.Action;
 import dev.ckateptb.minecraft.deluxeactions.action.event.ActionRequestEvent;

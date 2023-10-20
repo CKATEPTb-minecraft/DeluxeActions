@@ -1,8 +1,8 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.actions.permission;
+package dev.ckateptb.minecraft.deluxeactions.integration.actions.permission;
 
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.minecraft.deluxeactions.action.service.ActionService;
-import dev.ckateptb.minecraft.deluxeactions.impl.actions.AbstractAction;
+import dev.ckateptb.minecraft.deluxeactions.integration.actions.AbstractAction;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,5 +29,11 @@ public class PermissionAction extends AbstractAction {
             result = toBoolean(split[split.length - 1]);
         }
         return player.hasPermission(permission) == result;
+    }
+
+    @Override
+    public String getInstruction() {
+        return "Pass two arguments via ';', the first is permission, " +
+                "the second is the result you expect. Example deluxactions.command.reload;true";
     }
 }

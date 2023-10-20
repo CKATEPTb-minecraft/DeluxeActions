@@ -1,8 +1,8 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.actions.condition;
+package dev.ckateptb.minecraft.deluxeactions.integration.actions.condition;
 
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.minecraft.deluxeactions.action.service.ActionService;
-import dev.ckateptb.minecraft.deluxeactions.impl.actions.AbstractAction;
+import dev.ckateptb.minecraft.deluxeactions.integration.actions.AbstractAction;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -29,5 +29,11 @@ public class ConditionAction extends AbstractAction {
             result = toBoolean(split[split.length - 1]);
         }
         return toBoolean(condition) == result;
+    }
+
+    @Override
+    public String getInstruction() {
+        return "Pass two arguments via ';', the first is placeholderapi boolean result, " +
+                "the second is the result you expect. Example %player_is_sneaking%;true";
     }
 }

@@ -48,11 +48,20 @@ public class ActionService implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void on(DeluxeActionsReloadEvent event) {
+        System.out.println("action");
         this.actions.clear();
         Bukkit.getPluginManager().callEvent(new ActionRequestEvent(this));
     }
 
-    public void process(LinkedList<Map.Entry<Action, String>> actions, Player player) {
+    public void process(Map<Action, String> actions) {
+        this.process(actions, null);
+    }
+
+    public void process(Map<Action, String> actions, Player player) {
+        this.process(new LinkedList<>(actions.entrySet()), player);
+    }
+
+    private void process(LinkedList<Map.Entry<Action, String>> actions, Player player) {
         if (actions.isEmpty()) return;
         Map.Entry<Action, String> entry = actions.remove(0);
         Action action = entry.getKey();
@@ -63,7 +72,7 @@ public class ActionService implements Listener {
             }
         };
         if (action instanceof DelayedAction delayed) {
-            long ticks = delayed.getDelay().toMillis() / 50;
+            long ticks = delayed.getDelay(value).toMillis() / 50;
             Bukkit.getScheduler().runTaskLater(DeluxeActions.getPlugin(), runnable, ticks);
         } else runnable.run();
     }

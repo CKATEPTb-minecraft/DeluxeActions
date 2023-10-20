@@ -4,22 +4,20 @@ import dev.ckateptb.common.tableclothconfig.hocon.HoconConfig;
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.common.tableclothcontainer.annotation.PostConstruct;
 import dev.ckateptb.minecraft.deluxeactions.DeluxeActions;
-import dev.ckateptb.minecraft.deluxeactions.event.DeluxeActionsReloadEvent;
 import dev.ckateptb.minecraft.varflex.internal.org.spongepowered.configurate.objectmapping.meta.Comment;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 
+import javax.annotation.Nullable;
 import java.io.File;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Getter
 @Component
-public class DeluxeActionsConfig extends HoconConfig implements Listener {
+public class DeluxeActionsConfig extends HoconConfig {
     @Comment("""
             Examples:
                 example-task {
@@ -46,11 +44,6 @@ public class DeluxeActionsConfig extends HoconConfig implements Listener {
         return DeluxeActions.getPlugin().getDataFolder().toPath().resolve("config.json").toFile();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void on(DeluxeActionsReloadEvent event) {
-        this.load();
-    }
-
-    public record TaskDeclaration(String type, String handle, List<String> actions) {
+    public record TaskDeclaration(String type, String handle, List<String> actions, @Nullable Instant lastIssued) {
     }
 }

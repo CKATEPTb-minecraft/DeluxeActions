@@ -1,4 +1,4 @@
-package dev.ckateptb.minecraft.deluxeactions.impl.player;
+package dev.ckateptb.minecraft.deluxeactions.integration.player;
 
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.minecraft.deluxeactions.task.Task;
