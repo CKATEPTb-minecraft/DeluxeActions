@@ -7,7 +7,7 @@ public class ChronoUnitParser {
     public static Duration parse(String value) {
         String[] split = value.split(";");
         if (split.length != 2) return Duration.ZERO;
-        ChronoUnit unit = ChronoUnit.valueOf(split[0].toLowerCase());
+        ChronoUnit unit = ChronoUnit.valueOf(split[0].toUpperCase());
         return Duration.of(Long.parseLong(split[1]), unit);
     }
 }

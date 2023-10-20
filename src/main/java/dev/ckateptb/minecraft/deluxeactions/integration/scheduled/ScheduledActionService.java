@@ -10,13 +10,15 @@ import dev.ckateptb.minecraft.deluxeactions.task.type.event.TaskTypeRequestEvent
 import dev.ckateptb.minecraft.deluxeactions.task.type.service.TaskTypeService;
 import dev.ckateptb.minecraft.deluxeactions.util.ChronoUnitParser;
 import dev.ckateptb.minecraft.nicotine.annotation.Schedule;
+import dev.ckateptb.minecraft.varflex.internal.org.spongepowered.configurate.ConfigurateException;
 import lombok.CustomLog;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Component
 @CustomLog
@@ -46,15 +48,31 @@ public class ScheduledActionService implements Listener {
     @Schedule(initialDelay = 0, fixedRate = 0)
     public void tick() {
         if (this.type == null) return;
+        AtomicBoolean update = new AtomicBoolean(false);
         this.service.getTasks(type)
                 .filter(task -> {
                     String name = task.getName();
-                    Map<String, DeluxeActionsConfig.TaskDeclaration> tasks = this.config.getTasks();
-                    DeluxeActionsConfig.TaskDeclaration declaration = tasks.get(name);
-                    return declaration.lastIssued() == null ||
-                            Instant.now().isAfter(declaration.lastIssued()
-                                    .plus(ChronoUnitParser.parse(task.getHandler())));
+                    Instant now = Instant.now();
+                    Duration duration = ChronoUnitParser.parse(task.getHandler());
+                    boolean result = now.isAfter(this.config.getSchedules(name).plus(duration));
+                    if (result) {
+                        this.config.updateSchedules(name);
+                        update.set(true);
+                        try {
+                            this.config.save();
+                        } catch (ConfigurateException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return result;
                 })
                 .forEach(task -> this.actionService.process(task.getActions()));
+        if (update.get()) {
+            try {
+                this.config.save();
+            } catch (ConfigurateException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

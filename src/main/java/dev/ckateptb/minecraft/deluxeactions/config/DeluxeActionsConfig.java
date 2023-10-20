@@ -8,7 +8,6 @@ import dev.ckateptb.minecraft.varflex.internal.org.spongepowered.configurate.obj
 import lombok.Getter;
 import lombok.SneakyThrows;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.time.Instant;
 import java.util.HashMap;
@@ -31,6 +30,15 @@ public class DeluxeActionsConfig extends HoconConfig {
                 }
             """)
     private Map<String, TaskDeclaration> tasks = new HashMap<>();
+    private Map<String, Instant> schedules = new HashMap<>();
+
+    public void updateSchedules(String task) {
+        this.schedules.put(task, Instant.now());
+    }
+
+    public Instant getSchedules(String task) {
+        return this.schedules.getOrDefault(task, Instant.now());
+    }
 
     @SneakyThrows
     @PostConstruct
@@ -44,6 +52,6 @@ public class DeluxeActionsConfig extends HoconConfig {
         return DeluxeActions.getPlugin().getDataFolder().toPath().resolve("config.json").toFile();
     }
 
-    public record TaskDeclaration(String type, String handle, List<String> actions, @Nullable Instant lastIssued) {
+    public record TaskDeclaration(String type, String handle, List<String> actions) {
     }
 }
