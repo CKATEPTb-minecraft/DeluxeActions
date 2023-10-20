@@ -30,14 +30,16 @@ public class DeluxeActionsConfig extends HoconConfig {
                 }
             """)
     private Map<String, TaskDeclaration> tasks = new HashMap<>();
-    private Map<String, Instant> schedules = new HashMap<>();
+    private Map<String, Long> schedules = new HashMap<>();
 
     public void updateSchedules(String task) {
-        this.schedules.put(task, Instant.now());
+        this.schedules.put(task, Instant.now().toEpochMilli());
     }
 
     public Instant getSchedules(String task) {
-        return this.schedules.getOrDefault(task, Instant.now());
+        Long epochMilli = this.schedules.get(task);
+        if (epochMilli == null) return null;
+        return Instant.ofEpochMilli(epochMilli);
     }
 
     @SneakyThrows

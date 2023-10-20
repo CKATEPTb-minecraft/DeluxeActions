@@ -54,15 +54,11 @@ public class ScheduledActionService implements Listener {
                     String name = task.getName();
                     Instant now = Instant.now();
                     Duration duration = ChronoUnitParser.parse(task.getHandler());
-                    boolean result = now.isAfter(this.config.getSchedules(name).plus(duration));
+                    Instant schedules = this.config.getSchedules(name);
+                    boolean result = schedules == null || now.isAfter(schedules.plus(duration));
                     if (result) {
                         this.config.updateSchedules(name);
                         update.set(true);
-                        try {
-                            this.config.save();
-                        } catch (ConfigurateException e) {
-                            throw new RuntimeException(e);
-                        }
                     }
                     return result;
                 })
