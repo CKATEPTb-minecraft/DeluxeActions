@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.io.File;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,17 +29,6 @@ public class DeluxeActionsConfig extends HoconConfig {
                 }
             """)
     private Map<String, TaskDeclaration> tasks = new HashMap<>();
-    private Map<String, Long> schedules = new HashMap<>();
-
-    public void updateSchedules(String task) {
-        this.schedules.put(task, Instant.now().toEpochMilli());
-    }
-
-    public Instant getSchedules(String task) {
-        Long epochMilli = this.schedules.get(task);
-        if (epochMilli == null) return null;
-        return Instant.ofEpochMilli(epochMilli);
-    }
 
     @SneakyThrows
     @PostConstruct

@@ -2,7 +2,7 @@ package dev.ckateptb.minecraft.deluxeactions.integration.scheduled;
 
 import dev.ckateptb.common.tableclothcontainer.annotation.Component;
 import dev.ckateptb.minecraft.deluxeactions.action.service.ActionService;
-import dev.ckateptb.minecraft.deluxeactions.config.DeluxeActionsConfig;
+import dev.ckateptb.minecraft.deluxeactions.config.DeluxeScheduledActionsConfig;
 import dev.ckateptb.minecraft.deluxeactions.task.Task;
 import dev.ckateptb.minecraft.deluxeactions.task.service.TaskService;
 import dev.ckateptb.minecraft.deluxeactions.task.type.TaskType;
@@ -28,7 +28,7 @@ public class ScheduledActionService implements Listener {
 
     private final TaskService service;
     private final TaskTypeService typeService;
-    private final DeluxeActionsConfig config;
+    private final DeluxeScheduledActionsConfig config;
     private final ActionService actionService;
 
     private TaskType<?> type;
