@@ -7,6 +7,7 @@ import dev.ckateptb.minecraft.deluxeactions.action.delay.DelayedAction;
 import dev.ckateptb.minecraft.deluxeactions.action.event.ActionRegisterEvent;
 import dev.ckateptb.minecraft.deluxeactions.action.event.ActionRequestEvent;
 import dev.ckateptb.minecraft.deluxeactions.event.DeluxeActionsReloadEvent;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,18 +53,18 @@ public class ActionService implements Listener {
         Bukkit.getPluginManager().callEvent(new ActionRequestEvent(this));
     }
 
-    public void process(Map<Action, String> actions) {
+    public void process(Map<Pair<String, Action>, String> actions) {
         this.process(actions, null);
     }
 
-    public void process(Map<Action, String> actions, Player player) {
+    public void process(Map<Pair<String, Action>, String> actions, Player player) {
         this.process(new LinkedList<>(actions.entrySet()), player);
     }
 
-    private void process(LinkedList<Map.Entry<Action, String>> actions, Player player) {
+    private void process(LinkedList<Map.Entry<Pair<String, Action>, String>> actions, Player player) {
         if (actions.isEmpty()) return;
-        Map.Entry<Action, String> entry = actions.remove(0);
-        Action action = entry.getKey();
+        Map.Entry<Pair<String, Action>, String> entry = actions.remove(0);
+        Action action = entry.getKey().getValue();
         String value = entry.getValue();
         Runnable runnable = () -> {
             if (action.process(player, value)) {

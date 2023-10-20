@@ -57,6 +57,7 @@ public class TaskService implements Listener {
             TaskType<? extends Task> taskType = this.typeService.findType(type).orElse(null);
             if (taskType != null) {
                 Task task = taskType.createTask(name.toLowerCase().trim(), declaration.handle());
+                int counter = 0;
                 for (String actionDeclaration : declaration.actions()) {
                     Matcher matcher = Pattern.compile("^\\[(.+)](.+)").matcher(actionDeclaration);
                     if (matcher.find()) {
@@ -64,7 +65,7 @@ public class TaskService implements Listener {
                         String value = matcher.group(2).trim();
                         Action action = this.actionService.findAction(actionName).orElse(null);
                         if (action != null) {
-                            task.registerAction(action, value);
+                            task.registerAction(++counter + actionDeclaration, action, value);
                         } else {
                             log.warn("Task {} has unknown action {} with value {}", name, actionName, value);
                             return;
